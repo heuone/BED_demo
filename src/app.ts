@@ -1,6 +1,7 @@
 // external imports
 import express from "express";
 import  { Express } from "express";
+import morgan from "morgan";
 
 // internal imports
 import setupSwagger from "../config/swagger";
@@ -10,6 +11,8 @@ import { timeStamp } from "console";
 const app: Express = express();
 
 setupSwagger(app);
+
+app.use(morgan("combined"));
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
