@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 // internal imports
 import setupSwagger from "../config/swagger";
+import itemRoutes from "./api/v1/routes/itemRoutes";
 import { timeStamp } from "console";
 
 
@@ -13,6 +14,7 @@ const app: Express = express();
 setupSwagger(app);
 
 app.use(morgan("combined"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
@@ -41,5 +43,7 @@ app.get("/api/v1/health", (req, res) =>{
         version: "1.0.0"
     });
 });
+
+app.use("/api/v1/items", itemRoutes);
 
 export default app;
